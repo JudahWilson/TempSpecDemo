@@ -1,0 +1,47 @@
+A specification defining target syntaxes and keywords per templating engine. 
+The goal is to facilitate universal UI components by using the ability to automatically translate between templating engines which comes from defined specs for the templating engine's syntaxes and keywords.
+The goal isn't to write a tool to convert all of a web projects templating engine to another because that runs into the problem of the tool not being able to handle all the edge framework specific implementations.
+However, to some degree this tool can mitigate some problems of framework specific boilerplate code by allowing configuration to output specific boilerplate in the template output. This boilerplate can be in the same template file or perhaps a separate template file per this configuration 
+In all use cases, this tool will use a "best-effort" approach. 
+On a related note, while common operations in templates (e.g. json encoding, string splitting, and more) are explicitly defined and are translatable, to handle arbitrary calls to functions and object methods and attributes, the respective syntax is defined between the engines.
+
+
+equals
+not equals
+greater than
+less than
+greater than or equal to
+less than or equal to
+and
+or
+in
+not in
+is defined
+is not defined
+null
+if
+else if
+else
+for each
+function call
+access object . notation
+assign variable
+access value in json-like object
+type specification or annotation
+csrf
+common operations
+    raw
+    json encode
+    json decode
+    str split
+    str join
+    str replace
+    str trim
+    str toLowerCase
+    str toUpperCase
+    debug print
+    format date
+?load css
+?load js
+calling a template
+calling a template with a context
