@@ -8,3 +8,17 @@ services:
       - ./dj:/app
     ports:
       - "8000:8000"
+  ruby-on-rails:
+    build:
+      context: ./ruby-on-rails
+      dockerfile: Dockerfile
+    ports:
+      - "8001:3000"
+    volumes:
+      - ./ruby-on-rails:/app
+      - rails_gems:/usr/local/bundle
+      - rails_db:/app/db
+
+volumes:
+  rails_gems:
+  rails_db:

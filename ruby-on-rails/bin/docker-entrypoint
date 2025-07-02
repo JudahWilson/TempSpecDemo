@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+
+APP_DIR=/app
+
+# ── bootstrap only if the volume is empty ────────────────────────────────────
+if [ ! -f "$APP_DIR/config.ru" ]; then
+  echo "▶ No Rails app detected - generating one..."
+
+  cd $APP_DIR
+  rails new . \
+    --skip-test --skip-javascript --skip-hotwire --skip-git \
+    --database=sqlite3 --force
+
+  bundle install
+  rails db:prepare
+
+  # Minimal “hello” page
+  rails generate controller Pages home --skip-routes
+  cat > config/routes.rb <<'RUBY'
+Rails.application.routes.draw do
+  root "pages#home"
+end
+RUBY
+  echo '<h1>Hello from Dockerized Rails 👋</h1>' > app/views/pages/home.html.erb
+fi
+
+exec "$@"
